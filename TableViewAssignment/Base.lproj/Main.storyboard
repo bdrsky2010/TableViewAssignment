@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4m-bu-V6i">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--FocusMode-->
+        <scene sceneID="9zq-LI-xZb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FocusMode" id="hdi-lF-soW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="WMs-lX-lmU"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dFq-pi-uug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1695.4198473282443" y="-213.38028169014086"/>
+        </scene>
+        <!--Setting-->
+        <scene sceneID="wDd-U8-Jxb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" id="w52-PT-OFc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="M8A-w0-cA5"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bez-i8-gQA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1669.4656488549617" y="-102.11267605633803"/>
+        </scene>
+        <!--Shopping-->
+        <scene sceneID="I8b-eA-bs0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Shopping" id="HGg-3S-5be" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="OLe-Zd-Wpf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yYi-yB-CSB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1681.679389312977" y="-2.1126760563380285"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ZYF-On-PES">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="n4m-bu-V6i" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FVJ-b7-enc">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="labelColor"/>
+                        <color key="barTintColor" systemColor="labelColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="hdi-lF-soW" kind="relationship" relationship="viewControllers" id="u14-Q7-A4W"/>
+                        <segue destination="w52-PT-OFc" kind="relationship" relationship="viewControllers" id="1AQ-6y-ulA"/>
+                        <segue destination="HGg-3S-5be" kind="relationship" relationship="viewControllers" id="QsT-ZA-5eC"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lIl-HI-VyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75.572519083969468" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
