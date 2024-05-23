@@ -34,7 +34,7 @@ class ShoppingTableViewCell: UITableViewCell {
     }
     
     private func configCellView() {
-        self.cellView.backgroundColor = .lightGray
+        self.cellView.backgroundColor = .systemGray6
         self.cellView.layer.cornerRadius = 10
     }
     

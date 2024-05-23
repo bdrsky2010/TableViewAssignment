@@ -25,7 +25,7 @@ class ShoppingTextFieldTableViewCell: UITableViewCell {
     }
     
     private func configCoverView() {
-        self.textFieldCoverView.backgroundColor = .lightGray
+        self.textFieldCoverView.backgroundColor = .systemGray6
         self.textFieldCoverView.layer.cornerRadius = 10
     }
     
@@ -38,7 +38,7 @@ class ShoppingTextFieldTableViewCell: UITableViewCell {
     private func configPlusButton() {
         self.plusButton.setTitle("추가", for: .normal)
         self.plusButton.setTitleColor(.label, for: .normal)
-        self.plusButton.backgroundColor = .darkGray
+        self.plusButton.backgroundColor = .systemGray5
         self.plusButton.layer.cornerRadius = 10
     }
 
