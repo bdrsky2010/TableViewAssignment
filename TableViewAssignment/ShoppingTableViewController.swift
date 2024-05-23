@@ -32,43 +32,53 @@ class ShoppingTableViewController: UITableViewController {
     
 
     // MARK: - Table view data source
-
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    // footer height 값 줄이기
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        CGFloat.leastNormalMagnitude
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
         
-        return shoppingList.count + 1
+        return shoppingList.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             return 50
-        } else {
-            return 40
         }
+        
+        return 40
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "textField", for: indexPath) as! ShoppingTextFieldTableViewCell
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! ShoppingTableViewCell
-            
-            let index = indexPath.row - 1
-            
-            let checkImageName = shoppingList[index].check ? "checkmark.square.fill" : "checkmark.square"
-            let starImageName = shoppingList[index].star ? "star.fill" : "star"
-            
-            let checkImage = UIImage(systemName: checkImageName)
-            let starImage = UIImage(systemName: starImageName)
-            
-            cell.titleLabel.text = shoppingList[index].title
-            cell.checkButton.setImage(checkImage, for: .normal)
-            cell.starButton.setImage(starImage, for: .normal)
-            
-            return cell
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! ShoppingTableViewCell
+        
+        let index = indexPath.row
+        
+        let checkImageName = shoppingList[index].check ? "checkmark.square.fill" : "checkmark.square"
+        let starImageName = shoppingList[index].star ? "star.fill" : "star"
+        
+        let checkImage = UIImage(systemName: checkImageName)
+        let starImage = UIImage(systemName: starImageName)
+        
+        cell.titleLabel.text = shoppingList[index].title
+        cell.checkButton.setImage(checkImage, for: .normal)
+        cell.starButton.setImage(starImage, for: .normal)
+        
+        return cell
     }
     
     @IBAction func editingChanged(_ sender: UITextField) {
