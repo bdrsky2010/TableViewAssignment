@@ -22,9 +22,9 @@ class ShoppingTableViewCell: UITableViewCell {
     
     private func configUI() {
         configCellView()
-        configcheckButton()
+        configCheckButton()
         configTitleLabel()
-        configTitleLabel()
+        configStarButton()
     }
     
     private func configCellView() {
@@ -32,8 +32,8 @@ class ShoppingTableViewCell: UITableViewCell {
         self.cellView.layer.cornerRadius = 10
     }
     
-    private func configcheckButton() {
-        self.checkButton.tintColor = .label
+    private func configCheckButton() {
+        self.checkButton.tintColor = .systemIndigo
     }
     
     private func configTitleLabel() {
@@ -42,7 +42,7 @@ class ShoppingTableViewCell: UITableViewCell {
     }
     
     private func configStarButton() {
-        self.starButton.tintColor = .label
+        self.starButton.tintColor = .systemYellow
     }
     
     override func layoutSubviews() {

@@ -42,9 +42,6 @@
                                             <rect key="frame" x="10" y="5" width="253" height="34.333333333333336"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <action selector="editingChanged:" destination="7GQ-nS-eKR" eventType="editingChanged" id="hlB-Km-pr1"/>
-                                            </connections>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOI-dV-IVM">
                                             <rect key="frame" x="283" y="7.3333333333333321" width="50" height="29.999999999999996"/>
@@ -53,9 +50,6 @@
                                             </constraints>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="추가"/>
-                                            <connections>
-                                                <action selector="plusButtonClicked:" destination="7GQ-nS-eKR" eventType="touchUpInside" id="vj8-bd-fQ0"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -68,7 +62,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="plusButton" destination="KOI-dV-IVM" id="sGH-rX-Mea"/>
+                                    <outlet property="plusButton" destination="KOI-dV-IVM" id="fRT-4H-qaq"/>
                                     <outlet property="textFieldCoverView" destination="DxI-xf-Kax" id="MtV-Rf-9dy"/>
                                     <outlet property="userTextField" destination="s5M-ez-Ih1" id="LsF-Nb-7vH"/>
                                 </connections>

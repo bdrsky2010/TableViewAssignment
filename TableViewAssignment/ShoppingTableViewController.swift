@@ -33,6 +33,57 @@ class ShoppingTableViewController: UITableViewController {
     
 
     // MARK: - Table view data source
+    
+    // trailing swipe action
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let checkAction = UIContextualAction(style: .normal, title: "Star") { [weak self] _, _, success in
+            guard let self else {
+                success(false)
+                return
+            }
+            
+            shoppingList[indexPath.row].check.toggle()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            success(true)
+        }
+        checkAction.image = UIImage(systemName: "checkmark.square.fill")
+        checkAction.backgroundColor = .systemIndigo
+        
+        return UISwipeActionsConfiguration(actions: [checkAction])
+    }
+    
+    // leading swipe action
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let starAction = UIContextualAction(style: .normal, title: "Star") { [weak self] _, _, success in
+            guard let self else {
+                success(false)
+                return
+            }
+            
+            shoppingList[indexPath.row].star.toggle()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            success(true)
+        }
+        starAction.image = UIImage(systemName: "star.fill")
+        starAction.backgroundColor = .systemYellow
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
+            guard let self else {
+                success(false)
+                return
+            }
+            
+            shoppingList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .bottom)
+            success(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [starAction, deleteAction])
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -43,25 +94,20 @@ class ShoppingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        
-        return shoppingList.count
+        return section == 0 ? 1 : shoppingList.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 50
-        }
-        
-        return 40
+        return indexPath.section == 0 ? 50 : 40
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "textField", for: indexPath) as! ShoppingTextFieldTableViewCell
+            
+            cell.plusButton.addTarget(self, action: #selector(plusButtonClicked), for: .touchUpInside)
+            
             return cell
         }
         
@@ -75,47 +121,45 @@ class ShoppingTableViewController: UITableViewController {
         let checkImage = UIImage(systemName: checkImageName)
         let starImage = UIImage(systemName: starImageName)
         
-        let checkButtonAction = UIAction { [weak self] _ in
-            guard let self else { return }
-            shoppingList[index].check.toggle()
-            
-            let checkImageName = shoppingList[index].check ? "checkmark.square.fill" : "checkmark.square"
-            let checkImage = UIImage(systemName: checkImageName)
-            cell.checkButton.setImage(checkImage, for: .normal)
-        }
-        
-        let starButtonAction = UIAction { [weak self] _ in
-            guard let self else { return }
-            shoppingList[index].star.toggle()
-            
-            let starImageName = shoppingList[index].star ? "star.fill" : "star"
-            let starImage = UIImage(systemName: starImageName)
-            cell.starButton.setImage(starImage, for: .normal)
-        }
-        
         cell.titleLabel.text = shoppingList[index].title
         cell.checkButton.setImage(checkImage, for: .normal)
         cell.checkButton.tag = index
-        cell.checkButton.addAction(checkButtonAction, for: .touchUpInside)
+        cell.checkButton.addTarget(self, action: #selector(checkButtonClicked), for: .touchUpInside)
         
         cell.starButton.setImage(starImage, for: .normal)
         cell.starButton.tag = index
-        cell.starButton.addAction(starButtonAction, for: .touchUpInside)
+        cell.starButton.addTarget(self, action: #selector(starButtonClicked), for: .touchUpInside)
         
         return cell
     }
     
-    @IBAction func editingChanged(_ sender: UITextField) {
-        guard let text = sender.text else { return }
-        self.text = text
+    @objc
+    private func plusButtonClicked(sender: UIButton) {
+        // 타입캐스팅을 통해 텍스트필드 갖고 있는 셀 가져오기
+        let cell = tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! ShoppingTextFieldTableViewCell
+        let textField = cell.userTextField
+        
+        guard let text = textField?.text , text.count > 1 else { return } // 입력된 text의 글자 수가 1보다 클 경우에만 아래코드 작동
+        
+        shoppingList.append(Shopping(title: text, check: false, star: false)) // 구조체 배열에 초기 데이터 추가
+        tableView.reloadData() // 테이블뷰 다시 불러오기
+        
+        textField?.text = ""
+        
+        view.endEditing(true)
     }
     
-    @IBAction func plusButtonClicked(_ sender: UIButton) {
-        if !text.isEmpty {
-            self.shoppingList.append(Shopping(title: text, check: false, star: false))
-            tableView.reloadData()
-        }
+    @objc
+    private func checkButtonClicked(sender: UIButton) {
+        let index = sender.tag
+        shoppingList[index].check.toggle()
+        tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
     }
     
-    
+    @objc
+    private func starButtonClicked(sender: UIButton) {
+        let index = sender.tag
+        shoppingList[index].star.toggle()
+        tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+    }
 }
