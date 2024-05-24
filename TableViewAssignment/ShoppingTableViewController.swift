@@ -28,6 +28,7 @@ class ShoppingTableViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "쇼핑"
         view.backgroundColor = .systemBackground
+        tableView.keyboardDismissMode = .onDrag
     }
     
 
@@ -74,21 +75,42 @@ class ShoppingTableViewController: UITableViewController {
         let checkImage = UIImage(systemName: checkImageName)
         let starImage = UIImage(systemName: starImageName)
         
+        let checkButtonAction = UIAction { [weak self] _ in
+            guard let self else { return }
+            shoppingList[index].check.toggle()
+            
+            let checkImageName = shoppingList[index].check ? "checkmark.square.fill" : "checkmark.square"
+            let checkImage = UIImage(systemName: checkImageName)
+            cell.checkButton.setImage(checkImage, for: .normal)
+        }
+        
+        let starButtonAction = UIAction { [weak self] _ in
+            guard let self else { return }
+            shoppingList[index].star.toggle()
+            
+            let starImageName = shoppingList[index].star ? "star.fill" : "star"
+            let starImage = UIImage(systemName: starImageName)
+            cell.starButton.setImage(starImage, for: .normal)
+        }
+        
         cell.titleLabel.text = shoppingList[index].title
         cell.checkButton.setImage(checkImage, for: .normal)
+        cell.checkButton.tag = index
+        cell.checkButton.addAction(checkButtonAction, for: .touchUpInside)
+        
         cell.starButton.setImage(starImage, for: .normal)
+        cell.starButton.tag = index
+        cell.starButton.addAction(starButtonAction, for: .touchUpInside)
         
         return cell
     }
     
     @IBAction func editingChanged(_ sender: UITextField) {
-        print(#function)
         guard let text = sender.text else { return }
         self.text = text
     }
     
     @IBAction func plusButtonClicked(_ sender: UIButton) {
-        print(#function)
         if !text.isEmpty {
             self.shoppingList.append(Shopping(title: text, check: false, star: false))
             tableView.reloadData()

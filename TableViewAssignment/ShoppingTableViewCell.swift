@@ -7,15 +7,9 @@
 
 import UIKit
 
-enum ButtonType: String {
-    case check = "checkmark.square"
-    case star = "star"
-}
-
 class ShoppingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellView: UIView!
-    
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var starButton: UIButton!
