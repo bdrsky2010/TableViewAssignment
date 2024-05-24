@@ -36,6 +36,8 @@ class ShoppingTableViewController: UITableViewController {
     
     // trailing swipe action
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard indexPath.section == 1 else { return nil }
+        
         let checkAction = UIContextualAction(style: .normal, title: "Star") { [weak self] _, _, success in
             guard let self else {
                 success(false)
@@ -54,6 +56,7 @@ class ShoppingTableViewController: UITableViewController {
     
     // leading swipe action
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard indexPath.section == 1 else { return nil }
         
         let starAction = UIContextualAction(style: .normal, title: "Star") { [weak self] _, _, success in
             guard let self else {
